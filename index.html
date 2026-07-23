@@ -9,111 +9,42 @@
    * { margin: 0; padding: 0; box-sizing: border-box; }
    html, body { width: 100%; height: 100%; overflow: hidden; background: #f9f6ef; }
    body { font-family: 'Lora', serif; color: #333; }
-
-   #envelope-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(160deg, #f5f0e8 0%, #ede5d2 100%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    z-index: 999; transition: opacity 0.8s ease, transform 0.8s ease;
-   }
+   #envelope-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(160deg, #f5f0e8 0%, #ede5d2 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; transition: opacity 0.8s ease, transform 0.8s ease; }
    #envelope-screen.hide { opacity: 0; transform: scale(1.04); pointer-events: none; }
-
-   .envelope-wrap {
-    position: relative; width: 340px; height: 240px; cursor: pointer;
-    filter: drop-shadow(0 18px 40px rgba(0,0,0,0.18)); transition: transform 0.3s ease;
-   }
+   .envelope-wrap { position: relative; width: 340px; height: 240px; cursor: pointer; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.18)); transition: transform 0.3s ease; }
    .envelope-wrap:hover { transform: translateY(-6px) scale(1.02); }
-
-   .env-body {
-    position: absolute; bottom: 0; width: 340px; height: 200px;
-    background: #f9f3e8; border-radius: 0 0 14px 14px; border: 1.5px solid #d8c9a8;
-   }
-   .env-bottom {
-    position: absolute; bottom: 0; width: 0; height: 0;
-    border-left: 170px solid transparent; border-right: 170px solid transparent;
-    border-bottom: 110px solid #ecdfc5;
-   }
-   .env-left {
-    position: absolute; bottom: 0; left: 0; width: 0; height: 0;
-    border-bottom: 200px solid #e8dcca; border-right: 170px solid transparent;
-    border-radius: 0 0 0 14px;
-   }
-   .env-right {
-    position: absolute; bottom: 0; right: 0; width: 0; height: 0;
-    border-bottom: 200px solid #dfd3be; border-left: 170px solid transparent;
-    border-radius: 0 0 14px 0;
-   }
-   .env-flap {
-    position: absolute; top: 0; width: 0; height: 0;
-    border-left: 170px solid transparent; border-right: 170px solid transparent;
-    border-top: 130px solid #e0d3b8; transform-origin: top center;
-    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); z-index: 5;
-   }
+   .env-body { position: absolute; bottom: 0; width: 340px; height: 200px; background: #f9f3e8; border-radius: 0 0 14px 14px; border: 1.5px solid #d8c9a8; }
+   .env-bottom { position: absolute; bottom: 0; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-bottom: 110px solid #ecdfc5; }
+   .env-left { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-bottom: 200px solid #e8dcca; border-right: 170px solid transparent; border-radius: 0 0 0 14px; }
+   .env-right { position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-bottom: 200px solid #dfd3be; border-left: 170px solid transparent; border-radius: 0 0 14px 0; }
+   .env-flap { position: absolute; top: 0; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-top: 130px solid #e0d3b8; transform-origin: top center; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); z-index: 5; }
    .envelope-wrap.open .env-flap { transform: rotateX(180deg); }
-
-   .env-card {
-    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-    width: 290px; height: 170px;
-    background: linear-gradient(160deg, #FFEE8C 0%, #FFF8DC 100%);
-    border-radius: 8px; border: 1.5px solid #d4b800;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 16px; z-index: 3;
-    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), bottom 0.7s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-   }
+   .env-card { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 290px; height: 170px; background: linear-gradient(160deg, #FFEE8C 0%, #FFF8DC 100%); border-radius: 8px; border: 1.5px solid #d4b800; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; z-index: 3; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), bottom 0.7s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
    .envelope-wrap.open .env-card { bottom: 150px; transform: translateX(-50%) scale(1.04); }
    .env-card-name { font-family: 'Satisfy', cursive; font-size: 18px; color: #2c2c2c; margin-bottom: 6px; }
    .env-card-title { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #555; font-style: italic; margin-bottom: 10px; }
    .env-card-icon { font-size: 22px; margin-bottom: 6px; }
-
-   .env-seal {
-    position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
-    width: 48px; height: 48px;
-    background: radial-gradient(circle at 40% 35%, #d4a85c, #a07020);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 18px; box-shadow: 0 3px 12px rgba(0,0,0,0.25); z-index: 10;
-    transition: opacity 0.4s;
-   }
+   .env-seal { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: radial-gradient(circle at 40% 35%, #d4a85c, #a07020); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 3px 12px rgba(0,0,0,0.25); z-index: 10; transition: opacity 0.4s; }
    .envelope-wrap.open .env-seal { opacity: 0; pointer-events: none; }
-
    .envelope-label { margin-top: 50px; text-align: center; }
    .envelope-label h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: #3a3020; margin-bottom: 6px; }
    .envelope-label p { font-size: 14px; color: #7a6a50; margin-bottom: 24px; }
-
-   .btn-open {
-    display: inline-block; padding: 14px 38px;
-    background: linear-gradient(135deg, #FFEE8C 0%, #FFE066 100%);
-    color: #2c2c2c; font-family: 'Lora', serif; font-size: 16px; font-weight: 600;
-    border: 2px solid #2c2c2c; border-radius: 50px; cursor: pointer;
-    transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,0,0,0.10); letter-spacing: 0.5px;
-   }
+   .btn-open { display: inline-block; padding: 14px 38px; background: linear-gradient(135deg, #FFEE8C 0%, #FFE066 100%); color: #2c2c2c; font-family: 'Lora', serif; font-size: 16px; font-weight: 600; border: 2px solid #2c2c2c; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,0,0,0.10); letter-spacing: 0.5px; }
    .btn-open:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-   .btn-open:active { transform: translateY(0); }
-
    .deco-top { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 22px; opacity: 0.55; letter-spacing: 10px; }
    .deco-bot { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-size: 18px; opacity: 0.35; letter-spacing: 8px; }
-
    #invitation { display: none; width: 100%; height: 100%; }
    #invitation.show { display: block; }
-
    .container { width: 100vw; height: 100vh; position: relative; }
    .page { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out; overflow-y: auto; }
    .page.active { display: flex; opacity: 1; z-index: 10; }
-
-   .page-1 {
-    background: linear-gradient(135deg, #FFEE8C 0%, #FFF8DC 100%);
-    flex-direction: column; align-items: center; justify-content: center;
-    padding: 60px 40px; text-align: center; position: relative; overflow: hidden;
-   }
-   .page-1::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); border-radius: 50%; }
-   .page-1::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); border-radius: 50%; }
+   .page-1 { background: linear-gradient(135deg, #FFEE8C 0%, #FFF8DC 100%); flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; text-align: center; position: relative; overflow: hidden; }
    .content-1 { position: relative; z-index: 2; max-width: 800px; animation: fadeInUp 1s ease-out; }
    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
    .photo-container { margin: 40px 0; }
    .photo-circle { width: 280px; height: 280px; border-radius: 50%; margin: 0 auto; border: 6px solid #ffffff; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); background: white; }
    .photo-circle img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; border-radius: 50%; }
    .gratitude { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #000; margin-top: 30px; font-weight: 500; letter-spacing: 1px; text-align: center; }
-
    .page-2 { background: linear-gradient(135deg, #FFEE8C 0%, #FFF8DC 100%); flex-direction: column; align-items: center; justify-content: flex-start; padding: 70px 50px; overflow-y: auto; }
    .content-3hist { max-width: 800px; position: relative; animation: fadeInUp 1s ease-out; }
    .message-title { font-family: 'Cormorant Garamond', serif; text-align: center; font-size: 42px; color: #000; margin-bottom: 15px; font-style: italic; font-weight: 600; letter-spacing: 1px; }
@@ -124,36 +55,38 @@
    .signature { text-align: center; margin-top: 50px; padding-top: 30px; }
    .signature-closing { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #000; margin-bottom: 10px; }
    .signature-verse { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #555; font-style: italic; }
-
+   .page-3 { background: linear-gradient(135deg, #FFEE8C 0%, #FFF8DC 100%); flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; overflow-y: auto; }
+   .reception-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; color: #000; text-align: center; margin-bottom: 10px; font-style: italic; font-weight: 600; }
+   .reception-intro { text-align: center; font-size: 16px; line-height: 1.8; color: #444; margin-bottom: 20px; }
+   .event-details { width: 100%; max-width: 500px; background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+   .event-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; }
+   .event-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+   .event-label { font-weight: 600; color: #000; min-width: 110px; }
+   .event-value { text-align: right; color: #555; flex: 1; }
+   .map-button { width: 100%; max-width: 500px; padding: 16px; background: linear-gradient(135deg, #FFEE8C 0%, #FFE066 100%); color: #000; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600; border: 2px solid #2c2c2c; transition: all 0.3s ease; display: inline-block; font-size: 16px; margin-top: 20px; }
+   .page-4 { background: linear-gradient(135deg, #FFEE8C 0%, #FFF8DC 100%); flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; overflow-y: auto; }
+   .form-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; color: #000; text-align: center; margin-bottom: 15px; font-style: italic; }
+   .form-subtitle { text-align: center; font-size: 16px; color: #555; margin-bottom: 25px; }
+   form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 25px; }
+   .form-group { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+   .form-group label { display: block; text-align: center; margin-bottom: 8px; font-weight: 600; color: #000; }
+   .form-group input, .form-group select { width: 100%; padding: 14px; font-size: 15px; border: 2px solid #FFEE8C; border-radius: 8px; font-family: 'Lora', serif; background: white; color: #333; transition: all 0.3s ease; }
+   .form-group input:focus, .form-group select:focus { outline: none; border-color: #2c2c2c; box-shadow: 0 0 8px rgba(44,44,44,0.1); }
+   .submit-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #FFEE8C 0%, #FFE066 100%); color: #000; border: 2px solid #2c2c2c; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 15px; font-family: 'Lora', serif; }
+   .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
    .page-counter { position: fixed; bottom: 30px; right: 30px; background: #FFEE8C; color: #000; padding: 10px 16px; border-radius: 25px; font-weight: 600; border: 2px solid #2c2c2c; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100; }
    .page-dots { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
    .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(44,44,44,0.3); cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
    .dot.active { background: #2c2c2c; width: 30px; border-radius: 6px; }
-   .dot:hover { transform: scale(1.2); }
    .nav-controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 100; }
    .nav-btn { width: 50px; height: 50px; background: #FFEE8C; border: 2px solid #2c2c2c; border-radius: 50%; cursor: pointer; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
    .nav-btn:hover:not(:disabled) { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-   @media (max-width: 768px) {
-    .envelope-wrap { width: 290px; height: 205px; }
-    .env-body { width: 290px; }
-    .env-flap { border-left-width: 145px; border-right-width: 145px; border-top-width: 115px; }
-    .env-bottom { border-left-width: 145px; border-right-width: 145px; }
-    .env-left { border-right-width: 145px; }
-    .env-right { border-left-width: 145px; }
-    .env-card { width: 245px; height: 150px; }
-    .envelope-label h2 { font-size: 21px; }
-    .page { padding: 30px 20px; }
-    .message-title { font-size: 32px; }
-    .photo-circle { width: 200px; height: 200px; }
-    .page-counter { bottom: 80px; right: 20px; }
-    .nav-controls { bottom: 20px; }
-    .page-dots { top: 15px; gap: 6px; }
-    .dot { width: 10px; height: 10px; }
-    .page-1 { padding: 60px 20px; }
-    .page-2 { padding: 60px 25px; }
-   }
+   .success-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; }
+   .success-message { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: white; padding: 40px; border-radius: 12px; text-align: center; z-index: 201; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 500px; }
+   .success-message h2 { font-size: 32px; color: #000; margin-bottom: 15px; }
+   .success-message p { font-size: 16px; color: #555; line-height: 1.6; }
+   @media (max-width: 768px) { .envelope-wrap { width: 290px; height: 205px; } .env-body { width: 290px; } .env-flap { border-left-width: 145px; border-right-width: 145px; border-top-width: 115px; } .env-bottom { border-left-width: 145px; border-right-width: 145px; } .env-left { border-right-width: 145px; } .env-right { border-left-width: 145px; } .env-card { width: 245px; height: 150px; } .envelope-label h2 { font-size: 21px; } .page { padding: 30px 20px; } .message-title, .reception-title, .form-title { font-size: 32px; } .photo-circle { width: 200px; height: 200px; } .page-counter { bottom: 80px; right: 20px; } .nav-controls { bottom: 20px; } .page-dots { top: 15px; gap: 6px; } .dot { width: 10px; height: 10px; } }
   </style>
  </head>
  <body>
@@ -161,11 +94,7 @@
    <span class="deco-top">✦ ✦ ✦</span>
    <div class="envelope-wrap" id="envelopeWrap">
     <div class="env-flap"></div>
-    <div class="env-body">
-     <div class="env-left"></div>
-     <div class="env-right"></div>
-     <div class="env-bottom"></div>
-    </div>
+    <div class="env-body"><div class="env-left"></div><div class="env-right"></div><div class="env-bottom"></div></div>
     <div class="env-card">
      <div class="env-card-icon">🌿</div>
      <div class="env-card-name">Janieth Indira<br/>Vivas Maturana</div>
@@ -176,13 +105,14 @@
    <div class="envelope-label">
     <h2>Con esfuerzo, perseverancia, fe y el amor de quienes me acompañaron en este camino, hoy celebro un sueño hecho realidad.</h2>
     <p>Presiona el sobre para abrirla</p>
-    <button class="btn-open" id="btnOpen" onclick="openEnvelope()">⚕️🩺🎓 Dia de amor</button>
+    <button class="btn-open" onclick="openEnvelope()">⚕️🩺🎓 Dia de amor</button>
    </div>
    <span class="deco-bot">✦ ✦ ✦</span>
   </div>
 
   <div id="invitation">
    <div class="container">
+    <!-- PÁGINA 1: FOTO -->
     <div class="page page-1 active">
      <div class="content-1">
       <div class="photo-container">
@@ -194,6 +124,7 @@
      </div>
     </div>
 
+    <!-- PÁGINA 2: HISTORIA -->
     <div class="page page-2">
      <div class="content-3hist">
       <h1 class="message-title">La Historia Que Dios Escribió</h1>
@@ -211,76 +142,84 @@
       </div>
      </div>
     </div>
+
+    <!-- PÁGINA 3: RECEPCIÓN -->
+    <div class="page page-3">
+     <h2 class="reception-title">Celebremos un camino de dedicación</h2>
+     <p class="reception-intro">Con mucho amor y alegría, te invito a acompañarme a una recepción especial de este logro como entrega al servicio a través de la medicina.</p>
+     <div class="event-details">
+      <div class="event-row"><span class="event-label">📅 Fecha</span><span class="event-value">Viernes, 31 de Julio de 2026</span></div>
+      <div class="event-row"><span class="event-label">🕖 Hora</span><span class="event-value">19:00 H</span></div>
+      <div class="event-row"><span class="event-label">📍 Ubicación</span><span class="event-value">Makabro, Medellin (Sede la 80)</span></div>
+      <div class="event-row"><span class="event-label">🏠 Dirección</span><span class="event-value">Av. 80 #48B -40. Floresta. Medellín, Antioquia</span></div>
+     </div>
+     <a href="https://maps.app.goo.gl/Xwu6n3f5Bg3XGmXeA?g_st=ic" class="map-button">📍 Ver Ubicación en el Mapa</a>
+    </div>
+
+    <!-- PÁGINA 4: FORMULARIO -->
+    <div class="page page-4">
+     <h2 class="form-title">Confirma Asistencia</h2>
+     <p class="form-subtitle">Diligencia hasta el 24 de julio de 2026</p>
+     <form action="https://formspree.io/f/mnjegqdv" method="POST">
+      <div class="form-group">
+       <label for="nombre">Nombre Completo *</label>
+       <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo"/>
+      </div>
+      <div class="form-group">
+       <label for="asistencia">¿Asistirás? *</label>
+       <select id="asistencia" name="asistencia" required>
+        <option value="">-- Selecciona una opción --</option>
+        <option value="Sí, asistiré">✓ Sí, asistiré</option>
+        <option value="No, no podré asistir">❌ No, no podré asistir</option>
+       </select>
+      </div>
+      <button type="submit" class="submit-btn">📬 Enviar Confirmación</button>
+     </form>
+    </div>
    </div>
 
-   <div class="page-counter"><span id="currentPage">1</span> / 2</div>
-   <div class="page-dots">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-   </div>
+   <div class="page-counter"><span id="currentPage">1</span> / 4</div>
+   <div class="page-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
    <div class="nav-controls">
     <button class="nav-btn" id="prevBtn" onclick="previousPage()">❮</button>
     <button class="nav-btn" id="nextBtn" onclick="nextPage()">❯</button>
    </div>
   </div>
 
+  <div class="success-overlay" id="successOverlay"></div>
+  <div class="success-message" id="successMessage">
+   <h2>¡Gracias! 💛</h2>
+   <p>Tu confirmación ha sido registrada. Nos vemos el 31 de julio. ¡Que Dios te bendiga!</p>
+  </div>
+
   <script>
    var envelopeOpened = false;
-   function openEnvelope() {
-    if (envelopeOpened) return;
-    envelopeOpened = true;
-    var wrap = document.getElementById('envelopeWrap');
-    wrap.classList.add('open');
-    setTimeout(function () {
-     var screen = document.getElementById('envelope-screen');
-     screen.classList.add('hide');
-     setTimeout(function () {
-      screen.style.display = 'none';
-      var inv = document.getElementById('invitation');
-      inv.classList.add('show');
-      showPage(0);
-     }, 800);
-    }, 900);
-   }
+   function openEnvelope() { if (envelopeOpened) return; envelopeOpened = true; var wrap = document.getElementById('envelopeWrap'); wrap.classList.add('open'); setTimeout(function () { var screen = document.getElementById('envelope-screen'); screen.classList.add('hide'); setTimeout(function () { screen.style.display = 'none'; document.getElementById('invitation').classList.add('show'); showPage(0); }, 800); }, 900); }
    document.getElementById('envelopeWrap').addEventListener('click', openEnvelope);
-
    var currentPage = 0;
-   var pages, totalPages;
-   function initPages() {
-    pages = document.querySelectorAll('.page');
-    totalPages = pages.length;
-   }
-   function showPage(n) {
-    if (!pages) initPages();
-    pages.forEach(function (p) { p.classList.remove('active'); });
-    pages[n].classList.add('active');
-    document.getElementById('currentPage').textContent = n + 1;
-    document.getElementById('prevBtn').disabled = n === 0;
-    document.getElementById('nextBtn').disabled = n === totalPages - 1;
-    document.querySelectorAll('.dot').forEach(function (dot, index) {
-     dot.classList.toggle('active', index === n);
-    });
-    window.scrollTo(0, 0);
-   }
-   function nextPage() {
-    if (!pages) initPages();
-    if (currentPage < totalPages - 1) { currentPage++; showPage(currentPage); }
-   }
-   function previousPage() {
-    if (!pages) initPages();
-    if (currentPage > 0) { currentPage--; showPage(currentPage); }
-   }
-   document.addEventListener('DOMContentLoaded', function () {
-    initPages();
-    document.querySelectorAll('.dot').forEach(function (dot, index) {
-     dot.addEventListener('click', function () { currentPage = index; showPage(currentPage); });
-    });
-   });
-   document.addEventListener('keydown', function (e) {
-    if (document.getElementById('invitation').classList.contains('show')) {
-     if (e.key === 'ArrowRight') nextPage();
-     if (e.key === 'ArrowLeft') previousPage();
-    }
+   function showPage(n) { var pages = document.querySelectorAll('.page'); pages.forEach(function (p) { p.classList.remove('active'); }); pages[n].classList.add('active'); document.getElementById('currentPage').textContent = n + 1; document.getElementById('prevBtn').disabled = n === 0; document.getElementById('nextBtn').disabled = n === pages.length - 1; document.querySelectorAll('.dot').forEach(function (dot, index) { dot.classList.toggle('active', index === n); }); window.scrollTo(0, 0); }
+   function nextPage() { var pages = document.querySelectorAll('.page'); if (currentPage < pages.length - 1) { currentPage++; showPage(currentPage); } }
+   function previousPage() { if (currentPage > 0) { currentPage--; showPage(currentPage); } }
+   document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('.dot').forEach(function (dot, index) { dot.addEventListener('click', function () { currentPage = index; showPage(currentPage); }); }); });
+   document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+     .then(function(r) { return r.json(); })
+     .then(function(data) {
+      if (data.ok) {
+       document.getElementById('successOverlay').style.display = 'block';
+       document.getElementById('successMessage').style.display = 'block';
+       form.reset();
+       setTimeout(function() { document.getElementById('successOverlay').style.display = 'none'; document.getElementById('successMessage').style.display = 'none'; }, 3500);
+      } else { alert('Hubo un error. Intenta de nuevo.'); }
+      btn.textContent = '📬 Enviar Confirmación';
+      btn.disabled = false;
+     })
+     .catch(function() { alert('Hubo un error. Intenta de nuevo.'); btn.textContent = '📬 Enviar Confirmación'; btn.disabled = false; });
    });
   </script>
  </body>
